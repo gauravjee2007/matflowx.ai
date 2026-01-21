@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NIDAAN MATFLOW – Premium Chat</title>
+<title>NIDAAN MATFLOW – Ultra Premium</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
 *{
   box-sizing:border-box;
@@ -15,41 +15,54 @@
 
 body{
   margin:0;
-  background:linear-gradient(135deg,#ff6f00,#ff9800);
   height:100vh;
   overflow:hidden;
+  background:linear-gradient(135deg,#ff6f00,#ff9800,#ffb74d);
+  background-size:300% 300%;
+  animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
 }
 
 /* HEADER */
 header{
   position:fixed;
-  top:0; left:0;
-  width:100%;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
   z-index:100;
-  backdrop-filter:blur(10px);
-  background:rgba(255,255,255,0.15);
-  color:#fff;
+  backdrop-filter:blur(14px);
+  background:rgba(255,255,255,0.35);
   text-align:center;
   padding:14px 18px 16px;
-  box-shadow:0 4px 20px rgba(0,0,0,0.15);
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
+/* MAIN TITLE */
 .title-main{
   font-size:28px;
-  font-weight:700;
+  font-weight:800;
   letter-spacing:1px;
+  color:#000;
 }
 
+/* SUB TITLE */
 .title-sub{
-  font-size:13px;
-  font-style:italic;
-  color:#ffe0b2;
+  font-size:14px;
+  font-weight:700;
+  color:#000;
   margin-top:4px;
 }
 
 #darkToggle{
   position:absolute;
-  right:16px;
+  right:14px;
   top:14px;
   width:42px;
   height:42px;
@@ -57,16 +70,15 @@ header{
   border:none;
   cursor:pointer;
   font-size:18px;
-  background:rgba(255,255,255,0.25);
-  color:#fff;
-  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,0.15);
+  color:#000;
 }
 
 /* CHAT */
 .chat-area{
   position:absolute;
-  top:88px;
-  bottom:90px;
+  top:110px;
+  bottom:100px;
   left:0; right:0;
   padding:20px;
   overflow-y:auto;
@@ -76,37 +88,40 @@ header{
   scroll-behavior:smooth;
 }
 
+/* Bubble */
 .message{
-  padding:12px 16px;
-  border-radius:18px;
+  padding:14px 18px;
+  border-radius:20px;
   max-width:70%;
   font-size:16px;
   line-height:1.6;
-  backdrop-filter:blur(10px);
-  animation:slideUp 0.35s ease;
+  backdrop-filter:blur(12px);
+  animation:slideUp 0.3s ease;
+  position:relative;
 }
 
 @keyframes slideUp{
-  from{transform:translateY(20px);opacity:0;}
+  from{transform:translateY(15px);opacity:0;}
   to{transform:translateY(0);opacity:1;}
 }
 
+/* USER */
 .user{
   align-self:flex-end;
-  background:rgba(255,224,178,0.9);
+  background:rgba(255,224,178,0.95);
   color:#4e342e;
-  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
+/* AI */
 .ai{
   align-self:flex-start;
-  background:rgba(255,255,255,0.85);
+  background:rgba(255,255,255,0.95);
   color:#333;
-  box-shadow:0 6px 20px rgba(0,0,0,0.15);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
-.thinking{background:rgba(255,248,225,0.9);font-weight:600;}
-.typing{background:rgba(255,236,179,0.9);font-weight:600;}
+.typing{background:rgba(255,236,179,0.95);font-weight:600;}
 
 .time{
   font-size:11px;
@@ -118,25 +133,33 @@ header{
 /* FOOTER */
 footer{
   position:fixed;
-  bottom:0; left:0;
-  width:100%;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
   z-index:100;
   display:flex;
   gap:10px;
   padding:14px;
-  background:rgba(255,255,255,0.25);
-  backdrop-filter:blur(10px);
-  box-shadow:0 -4px 20px rgba(0,0,0,0.2);
+  background:rgba(255,255,255,0.35);
+  backdrop-filter:blur(14px);
+  border-radius:20px;
+  box-shadow:0 -6px 25px rgba(0,0,0,0.2);
 }
 
 input{
   flex:1;
-  padding:14px 16px;
+  padding:14px 18px;
   font-size:15px;
   border-radius:25px;
   border:none;
   outline:none;
-  background:rgba(255,255,255,0.8);
+  background:rgba(255,255,255,0.9);
+  box-shadow:inset 0 0 0 2px rgba(255,152,0,0.2);
+}
+
+input:focus{
+  box-shadow:inset 0 0 0 2px rgba(255,152,0,0.6);
 }
 
 button{
@@ -149,14 +172,15 @@ button{
   transition:0.2s ease;
 }
 
-#sendBtn{background:#ff9800;color:#fff;}
+#sendBtn{
+  background:linear-gradient(135deg,#ff9800,#ff6f00);
+  color:#fff;
+}
 #sendBtn:hover{transform:scale(1.1);}
-#micBtn{background:#f57c00;color:#fff;}
-#micBtn.listening{background:#c62828;animation:pulse 1s infinite;}
 
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(198,40,40,0.6);}
-  100%{box-shadow:0 0 0 12px rgba(198,40,40,0);}
+#micBtn{
+  background:linear-gradient(135deg,#f57c00,#ef6c00);
+  color:#fff;
 }
 
 /* DARK MODE */
@@ -166,7 +190,12 @@ body.dark{
 
 body.dark header,
 body.dark footer{
-  background:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.5);
+}
+
+body.dark .title-main,
+body.dark .title-sub{
+  color:#fff;
 }
 
 body.dark input{
@@ -258,9 +287,10 @@ function sendMessage(){
   ai.innerHTML=`Premium response received ✨<div class="time">${now()}</div>`;
   chat.appendChild(ai);
   scrollBottom();
- },1000);
+ },900);
 }
 </script>
 
 </body>
 </html>
+
