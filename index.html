@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>NIDAAN MATFLOW – Ultra Premium</title>
+<title>MATFLOWX – Ultra Premium</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -38,6 +38,14 @@ header{
   font-weight:800;
   color:#ffffff;
   letter-spacing:1px;
+}
+
+/* 🔥 ONLY CHANGE – BIG X */
+.title-main .x-big{
+  font-size:42px;      /* X bigger than M */
+  font-weight:900;
+  margin-left:2px;
+  vertical-align:middle;
 }
 
 .title-sub{
@@ -207,14 +215,16 @@ body.dark .user{
 <body>
 
 <header>
-  <div class="title-main">NIDAAN MATFLOW</div>
+  <div class="title-main">
+    MATFLOW<span class="x-big">X</span>
+  </div>
   <div class="title-sub">(Your AI Partner for Material Management)</div>
   <button id="darkToggle">🌙</button>
 </header>
 
 <div class="chat-area" id="chatArea">
   <div class="message ai">
-    Hello 👋 I’m <b>NIDAAN MATFLOW</b> — Your intelligent material assistant. How may I help you?
+    Hello 👋 I’m <b>MATFLOW<span class="x-big">X</span></b> — Your intelligent material assistant. How may I help you?
     <div class="time"></div>
   </div>
 </div>
@@ -265,7 +275,7 @@ function sendMessage(){
 
   const typing = document.createElement("div");
   typing.className = "message ai typing";
-  typing.innerHTML = "NIDAAN is validating material records…";
+  typing.innerHTML = MATFLOW is validating material records…";
   chat.appendChild(typing);
   scrollBottom();
 
