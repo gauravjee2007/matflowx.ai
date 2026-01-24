@@ -8,10 +8,7 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap');
 
-*{
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-}
+*{box-sizing:border-box;font-family:'Poppins',sans-serif;}
 
 body{
   margin:0;
@@ -22,58 +19,27 @@ body{
 /* HEADER */
 header{
   position:fixed;
-  top:0;
-  left:0;
-  width:100%;
+  top:0;left:0;width:100%;
   z-index:100;
   background:linear-gradient(135deg,#e65100,#ff6f00);
   text-align:center;
   padding:14px 16px;
   box-shadow:0 6px 20px rgba(0,0,0,0.25);
 }
-
-.title-main{
-  font-size:22px;
-  font-weight:800;
-  color:#ffffff;
-  letter-spacing:1px;
-}
-
-.title-main .x-big{
-  font-size:42px;
-  font-weight:900;
-  margin-left:2px;
-  vertical-align:middle;
-}
-
-.title-sub{
-  font-size:12px;
-  font-style:italic;
-  color:#ffe0b2;
-  margin-top:4px;
-}
-
+.title-main{font-size:22px;font-weight:800;color:#fff;}
+.title-main .x-big{font-size:42px;font-weight:900;}
+.title-sub{font-size:12px;font-style:italic;color:#ffe0b2;margin-top:4px;}
 #darkToggle{
-  position:absolute;
-  right:12px;
-  top:12px;
-  width:40px;
-  height:40px;
-  border-radius:50%;
-  border:none;
-  cursor:pointer;
-  font-size:18px;
-  background:rgba(0,0,0,0.25);
-  color:#fff;
+  position:absolute;right:12px;top:12px;
+  width:40px;height:40px;border-radius:50%;
+  border:none;cursor:pointer;
+  background:rgba(0,0,0,0.25);color:#fff;
 }
 
-/* CHAT AREA */
+/* CHAT */
 .chat-area{
   position:absolute;
-  top:110px;
-  bottom:90px;
-  left:0;
-  right:0;
+  top:110px;bottom:90px;left:0;right:0;
   padding:18px;
   overflow-y:auto;
   display:flex;
@@ -81,8 +47,6 @@ header{
   gap:14px;
   background:#fff8f0;
 }
-
-/* MESSAGE */
 .message{
   padding:14px 18px;
   border-radius:20px;
@@ -90,98 +54,54 @@ header{
   font-size:15px;
   line-height:1.6;
 }
+.user{align-self:flex-end;background:#ffe0b2;color:#4e342e;}
+.ai{align-self:flex-start;background:#fff;color:#333;}
+.typing{background:#fff3cd;font-weight:600;}
+.time{font-size:11px;opacity:0.5;margin-top:6px;text-align:right}
 
-.user{
-  align-self:flex-end;
-  background:#ffe0b2;
-  color:#4e342e;
-}
-
-.ai{
-  align-self:flex-start;
-  background:#ffffff;
-  color:#333;
-}
-
-.typing{
-  background:#fff3cd;
-  font-weight:600;
-}
-
-.time{
-  font-size:11px;
-  opacity:0.5;
-  margin-top:4px;
-  text-align:right;
-}
+/* STOCK LINES */
+.ai .stock-line{margin:4px 0}
 
 /* FOOTER */
 footer{
-  position:fixed;
-  bottom:0;
-  left:0;
-  width:100%;
-  display:flex;
-  gap:10px;
-  padding:12px;
-  background:#ffffff;
+  position:fixed;bottom:0;left:0;width:100%;
+  display:flex;gap:10px;padding:12px;
+  background:#fff;
   box-shadow:0 -4px 18px rgba(0,0,0,0.2);
 }
-
 input{
-  flex:1;
-  padding:14px 18px;
-  font-size:14px;
-  border-radius:25px;
-  border:none;
-  outline:none;
+  flex:1;padding:14px 18px;font-size:14px;
+  border-radius:25px;border:none;outline:none;
   background:#fff3e0;
 }
-
 button{
-  width:46px;
-  height:46px;
-  border-radius:50%;
-  border:none;
-  font-size:18px;
-  cursor:pointer;
+  width:46px;height:46px;border-radius:50%;
+  border:none;font-size:18px;cursor:pointer;
 }
-
-#micBtn{
-  background:linear-gradient(135deg,#ff8f00,#ff6f00);
-  color:#fff;
-}
-
-#sendBtn{
-  background:linear-gradient(135deg,#ff5722,#ff9800);
-  color:#fff;
-}
+#micBtn{background:linear-gradient(135deg,#ff8f00,#ff6f00);color:#fff;}
+#sendBtn{background:linear-gradient(135deg,#ff5722,#ff9800);color:#fff;}
 
 /* DARK MODE */
-body.dark{
-  background:#121212;
-}
-body.dark .chat-area{background:#1e1e1e;}
-body.dark footer{background:#000;}
-body.dark input{background:#2c2c2c;color:#fff;}
-body.dark .ai{background:#2a2a2a;color:#fff3e0;}
-body.dark .user{background:#ffcc80;color:#000;}
+body.dark{background:#121212}
+body.dark .chat-area{background:#1e1e1e}
+body.dark footer{background:#000}
+body.dark input{background:#2c2c2c;color:#fff}
+body.dark .ai{background:#2a2a2a;color:#fff3e0}
+body.dark .user{background:#ffcc80;color:#000}
 </style>
 </head>
 
 <body>
 
 <header>
-  <div class="title-main">
-    MATFLOW<span class="x-big">X</span>
-  </div>
+  <div class="title-main">MATFLOW<span class="x-big">X</span></div>
   <div class="title-sub">(Your AI Partner for Material Management)</div>
   <button id="darkToggle">🌙</button>
 </header>
 
 <div class="chat-area" id="chatArea">
   <div class="message ai">
-     <b>Namaste! 🙏 </b> I’m MATFLOWX— Your intelligent material assistant. How may I help you?
+     <b>Namaste!🙏  I’m MATFLOW<span class="x-big">X</span></b><br> Your intelligent material assistant. How may I help you?
     <div class="time"></div>
   </div>
 </div>
@@ -193,91 +113,91 @@ body.dark .user{background:#ffcc80;color:#000;}
 </footer>
 
 <script>
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded",()=>{
 
-  const input = document.getElementById("userInput");
-  const chat = document.getElementById("chatArea");
-  const sendBtn = document.getElementById("sendBtn");
-  const micBtn = document.getElementById("micBtn");
-  const darkToggle = document.getElementById("darkToggle");
+const chat=document.getElementById("chatArea");
+const input=document.getElementById("userInput");
+const sendBtn=document.getElementById("sendBtn");
+const micBtn=document.getElementById("micBtn");
+const darkToggle=document.getElementById("darkToggle");
 
-  const WEBHOOK_URL = "https://n8n-oazxlbnc.us-west-1.clawcloudrun.com/webhook/67a36a49-2506-4bc3-a1b4-0046fa8d5901";
+const WEBHOOK_URL="https://n8n-oazxlbnc.us-west-1.clawcloudrun.com/webhook/67a36a49-2506-4bc3-a1b4-0046fa8d5901";
 
-  darkToggle.onclick = () => {
-    document.body.classList.toggle("dark");
-    darkToggle.textContent = document.body.classList.contains("dark") ? "☀" : "🌙";
-  };
+darkToggle.onclick=()=>{
+  document.body.classList.toggle("dark");
+  darkToggle.textContent=document.body.classList.contains("dark")?"☀":"🌙";
+};
 
-  function now(){
-    return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
-  }
+function now(){
+  return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+}
 
-  function scrollBottom(){
-    chat.scrollTop = chat.scrollHeight;
-  }
+function scrollBottom(){
+  chat.scrollTop=chat.scrollHeight;
+}
 
-  sendBtn.addEventListener("click", sendMessage);
+/* 🔥 LINE-WISE FORMATTER */
+function formatReply(text){
+  return text
+    .replace(/Material Name:/gi,"<div class='stock-line'>📦 <b>Material:</b>")
+    .replace(/Code:/gi,"</div><div class='stock-line'>🔢 <b>Code:</b>")
+    .replace(/Location:/gi,"</div><div class='stock-line'>📍 <b>Location:</b>")
+    .replace(/Stock:/gi,"</div><div class='stock-line'>📦 <b>Stock:</b>")
+    .replace(/Part No:/gi,"</div><div class='stock-line'>🧩 <b>Part No:</b>")
+    .replace(/Value:/gi,"</div><div class='stock-line'>💰 <b>Value:</b>")
+    .concat("</div>");
+}
 
-  input.addEventListener("keydown", e => {
-    if(e.key === "Enter") sendMessage();
-  });
+sendBtn.onclick=sendMessage;
+input.addEventListener("keydown",e=>{if(e.key==="Enter")sendMessage();});
 
-  micBtn.addEventListener("click", () => {
-    alert("🎤 Voice input coming soon");
-  });
+micBtn.onclick=()=>alert("🎤 Voice input coming soon");
 
-  function sendMessage(){
-    const text = input.value.trim();
-    if(!text) return;
+function sendMessage(){
+  const text=input.value.trim();
+  if(!text)return;
 
-    const user = document.createElement("div");
-    user.className = "message user";
-    user.innerHTML = `${text}<div class="time">${now()}</div>`;
-    chat.appendChild(user);
-    input.value = "";
+  chat.innerHTML+=`
+    <div class="message user">${text}<div class="time">${now()}</div></div>
+  `;
+  input.value="";
+  scrollBottom();
+
+  const typing=document.createElement("div");
+  typing.className="message ai typing";
+  typing.textContent="MATFLOWX is validating records…";
+  chat.appendChild(typing);
+  scrollBottom();
+
+  fetch(WEBHOOK_URL,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({message:text})
+  })
+  .then(r=>r.json())
+  .then(d=>{
+    typing.remove();
+    let reply=d.reply||d.output||d.text||d[0]?.output||"⚠️ No response";
+
+    const ai=document.createElement("div");
+    ai.className="message ai";
+    ai.innerHTML=`
+      ${formatReply(reply)}
+      <div class="time">${now()}</div>
+    `;
+    chat.appendChild(ai);
     scrollBottom();
+  })
+  .catch(()=>{
+    typing.remove();
+    chat.innerHTML+=`
+      <div class="message ai">⚠️ Server not reachable<div class="time">${now()}</div></div>
+    `;
+  });
+}
 
-    const typing = document.createElement("div");
-    typing.className = "message ai typing";
-    typing.textContent = "MATFLOWX is validating records…";
-    chat.appendChild(typing);
-    scrollBottom();
-
-    fetch(WEBHOOK_URL,{
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify({ message: text })
-    })
-    .then(res => res.json())
-    .then(d => {
-      typing.remove();
-
-      let replyText = "⚠️ No response from AI";
-
-      if (Array.isArray(d) && d[0]?.output) replyText = d[0].output;
-      else if (d.reply) replyText = d.reply;
-      else if (d.text) replyText = d.text;
-      else if (d.output) replyText = d.output;
-      else if (typeof d === "string") replyText = d;
-
-      const ai = document.createElement("div");
-      ai.className = "message ai";
-      ai.innerHTML = `${replyText}<div class="time">${now()}</div>`;
-      chat.appendChild(ai);
-      scrollBottom();
-    })
-    .catch(() => {
-      typing.remove();
-      const ai = document.createElement("div");
-      ai.className = "message ai";
-      ai.innerHTML = `⚠️ Server not reachable<div class="time">${now()}</div>`;
-      chat.appendChild(ai);
-      scrollBottom();
-    });
-  }
 });
 </script>
 
 </body>
 </html>
-
