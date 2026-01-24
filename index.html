@@ -70,7 +70,7 @@ header{
 /* CHAT AREA */
 .chat-area{
   position:absolute;
-  top:110px;              /* 🔥 moved down */
+  top:110px;
   bottom:90px;
   left:0;
   right:0;
@@ -181,7 +181,7 @@ body.dark .user{background:#ffcc80;color:#000;}
 
 <div class="chat-area" id="chatArea">
   <div class="message ai">
-     <b>Namaste!🙏 I’m MATFLOW<span class="x-big">X</span></b> — Your intelligent material assistant. How may I help you?
+    🙏 <b>Namaste! I’m MATFLOW<span class="x-big">X</span></b> — Your intelligent material assistant. How may I help you?
     <div class="time"></div>
   </div>
 </div>
@@ -209,7 +209,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function now(){
-    return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    return new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
   }
 
   function scrollBottom(){
@@ -246,22 +246,31 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(WEBHOOK_URL,{
       method:"POST",
       headers:{ "Content-Type":"application/json" },
-      body:JSON.stringify({message:text})
+      body:JSON.stringify({ message: text })
     })
-    .then(r=>r.json())
-    .then(d=>{
+    .then(res => res.json())
+    .then(d => {
       typing.remove();
+
+      let replyText = "⚠️ No response from AI";
+
+      if (Array.isArray(d) && d[0]?.output) replyText = d[0].output;
+      else if (d.reply) replyText = d.reply;
+      else if (d.text) replyText = d.text;
+      else if (d.output) replyText = d.output;
+      else if (typeof d === "string") replyText = d;
+
       const ai = document.createElement("div");
-      ai.className="message ai";
-      ai.innerHTML=`${d.reply || d.text}<div class="time">${now()}</div>`;
+      ai.className = "message ai";
+      ai.innerHTML = `${replyText}<div class="time">${now()}</div>`;
       chat.appendChild(ai);
       scrollBottom();
     })
-    .catch(()=>{
+    .catch(() => {
       typing.remove();
       const ai = document.createElement("div");
-      ai.className="message ai";
-      ai.innerHTML=`⚠️ Server not reachable<div class="time">${now()}</div>`;
+      ai.className = "message ai";
+      ai.innerHTML = `⚠️ Server not reachable<div class="time">${now()}</div>`;
       chat.appendChild(ai);
       scrollBottom();
     });
@@ -271,3 +280,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
