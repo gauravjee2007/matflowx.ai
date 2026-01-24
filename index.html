@@ -16,7 +16,6 @@
 body{
   margin:0;
   height:100vh;
-  overflow:hidden;
   background:#fff3e0;
 }
 
@@ -40,9 +39,8 @@ header{
   letter-spacing:1px;
 }
 
-/* 🔥 ONLY CHANGE – BIG X */
 .title-main .x-big{
-  font-size:42px;      /* X bigger than M */
+  font-size:42px;
   font-weight:900;
   margin-left:2px;
   vertical-align:middle;
@@ -52,7 +50,7 @@ header{
   font-size:12px;
   font-style:italic;
   color:#ffe0b2;
-  margin-top:2px;
+  margin-top:4px;
 }
 
 #darkToggle{
@@ -72,17 +70,16 @@ header{
 /* CHAT AREA */
 .chat-area{
   position:absolute;
-  top:82px;
+  top:110px;              /* 🔥 moved down */
   bottom:90px;
   left:0;
   right:0;
-  padding:16px;
+  padding:18px;
   overflow-y:auto;
   display:flex;
   flex-direction:column;
-  gap:12px;
+  gap:14px;
   background:#fff8f0;
-  scroll-behavior:smooth;
 }
 
 /* MESSAGE */
@@ -92,41 +89,23 @@ header{
   max-width:85%;
   font-size:15px;
   line-height:1.6;
-  animation:slideUp 0.3s ease;
-}
-
-@keyframes slideUp{
-  from{transform:translateY(10px);opacity:0;}
-  to{transform:translateY(0);opacity:1;}
 }
 
 .user{
   align-self:flex-end;
   background:#ffe0b2;
   color:#4e342e;
-  box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
 .ai{
   align-self:flex-start;
   background:#ffffff;
   color:#333;
-  box-shadow:0 6px 15px rgba(0,0,0,0.15);
 }
 
-/* FLOATING THINK "VALIDATING" */
 .typing{
-  align-self:flex-start;
   background:#fff3cd;
-  color:#6d4c41;
   font-weight:600;
-  animation:floating 1.6s ease-in-out infinite;
-}
-
-@keyframes floating{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-6px)}
-  100%{transform:translateY(0)}
 }
 
 .time{
@@ -142,7 +121,6 @@ footer{
   bottom:0;
   left:0;
   width:100%;
-  z-index:100;
   display:flex;
   gap:10px;
   padding:12px;
@@ -167,9 +145,6 @@ button{
   border:none;
   font-size:18px;
   cursor:pointer;
-  display:flex;
-  align-items:center;
-  justify-content:center;
 }
 
 #micBtn{
@@ -186,29 +161,11 @@ button{
 body.dark{
   background:#121212;
 }
-
-body.dark .chat-area{
-  background:#1e1e1e;
-}
-
-body.dark footer{
-  background:#000;
-}
-
-body.dark input{
-  background:#2c2c2c;
-  color:#fff;
-}
-
-body.dark .ai{
-  background:#2a2a2a;
-  color:#fff3e0;
-}
-
-body.dark .user{
-  background:#ffcc80;
-  color:#000;
-}
+body.dark .chat-area{background:#1e1e1e;}
+body.dark footer{background:#000;}
+body.dark input{background:#2c2c2c;color:#fff;}
+body.dark .ai{background:#2a2a2a;color:#fff3e0;}
+body.dark .user{background:#ffcc80;color:#000;}
 </style>
 </head>
 
@@ -224,7 +181,7 @@ body.dark .user{
 
 <div class="chat-area" id="chatArea">
   <div class="message ai">
-    Hello 👋 I’m <b>MATFLOW<span class="x-big">X</span></b> — Your intelligent material assistant. How may I help you?
+     <b>Namaste!🙏 I’m MATFLOW<span class="x-big">X</span></b> — Your intelligent material assistant. How may I help you?
     <div class="time"></div>
   </div>
 </div>
@@ -236,73 +193,80 @@ body.dark .user{
 </footer>
 
 <script>
-const input = document.getElementById("userInput");
-const chat = document.getElementById("chatArea");
-const sendBtn = document.getElementById("sendBtn");
-const micBtn = document.getElementById("micBtn");
-const darkToggle = document.getElementById("darkToggle");
+document.addEventListener("DOMContentLoaded", () => {
 
-const WEBHOOK_URL = "https://n8n-oazxlbnc.us-west-1.clawcloudrun.com/webhook/67a36a49-2506-4bc3-a1b4-0046fa8d5901";
+  const input = document.getElementById("userInput");
+  const chat = document.getElementById("chatArea");
+  const sendBtn = document.getElementById("sendBtn");
+  const micBtn = document.getElementById("micBtn");
+  const darkToggle = document.getElementById("darkToggle");
 
-darkToggle.onclick = () => {
-  document.body.classList.toggle("dark");
-  darkToggle.textContent = document.body.classList.contains("dark") ? "☀" : "🌙";
-};
+  const WEBHOOK_URL = "https://n8n-oazxlbnc.us-west-1.clawcloudrun.com/webhook/67a36a49-2506-4bc3-a1b4-0046fa8d5901";
 
-function now(){
-  return new Date().toLocaleTimeString([], { hour:'2-digit', minute:'2-digit' });
-}
+  darkToggle.onclick = () => {
+    document.body.classList.toggle("dark");
+    darkToggle.textContent = document.body.classList.contains("dark") ? "☀" : "🌙";
+  };
 
-function scrollBottom(){
-  chat.scrollTop = chat.scrollHeight;
-}
+  function now(){
+    return new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  }
 
-sendBtn.onclick = sendMessage;
-input.addEventListener("keydown", e => {
-  if(e.key === "Enter") sendMessage();
-});
+  function scrollBottom(){
+    chat.scrollTop = chat.scrollHeight;
+  }
 
-function sendMessage(){
-  const text = input.value.trim();
-  if(!text) return;
+  sendBtn.addEventListener("click", sendMessage);
 
-  const user = document.createElement("div");
-  user.className = "message user";
-  user.innerHTML = `${text}<div class="time">${now()}</div>`;
-  chat.appendChild(user);
-  input.value = "";
-  scrollBottom();
-
-  const typing = document.createElement("div");
-  typing.className = "message ai typing";
-  typing.innerHTML = MATFLOW is validating material records…";
-  chat.appendChild(typing);
-  scrollBottom();
-
-  fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({ message: text })
-  })
-  .then(res => res.json())
-  .then(data => {
-    typing.remove();
-    const reply = data.reply || data.output || data.text || JSON.stringify(data);
-    const ai = document.createElement("div");
-    ai.className = "message ai";
-    ai.innerHTML = `${reply}<div class="time">${now()}</div>`;
-    chat.appendChild(ai);
-    scrollBottom();
-  })
-  .catch(() => {
-    typing.remove();
-    const ai = document.createElement("div");
-    ai.className = "message ai";
-    ai.innerHTML = `⚠️ Server not reachable<div class="time">${now()}</div>`;
-    chat.appendChild(ai);
-    scrollBottom();
+  input.addEventListener("keydown", e => {
+    if(e.key === "Enter") sendMessage();
   });
-}
+
+  micBtn.addEventListener("click", () => {
+    alert("🎤 Voice input coming soon");
+  });
+
+  function sendMessage(){
+    const text = input.value.trim();
+    if(!text) return;
+
+    const user = document.createElement("div");
+    user.className = "message user";
+    user.innerHTML = `${text}<div class="time">${now()}</div>`;
+    chat.appendChild(user);
+    input.value = "";
+    scrollBottom();
+
+    const typing = document.createElement("div");
+    typing.className = "message ai typing";
+    typing.textContent = "MATFLOWX is validating records…";
+    chat.appendChild(typing);
+    scrollBottom();
+
+    fetch(WEBHOOK_URL,{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body:JSON.stringify({message:text})
+    })
+    .then(r=>r.json())
+    .then(d=>{
+      typing.remove();
+      const ai = document.createElement("div");
+      ai.className="message ai";
+      ai.innerHTML=`${d.reply || d.text}<div class="time">${now()}</div>`;
+      chat.appendChild(ai);
+      scrollBottom();
+    })
+    .catch(()=>{
+      typing.remove();
+      const ai = document.createElement("div");
+      ai.className="message ai";
+      ai.innerHTML=`⚠️ Server not reachable<div class="time">${now()}</div>`;
+      chat.appendChild(ai);
+      scrollBottom();
+    });
+  }
+});
 </script>
 
 </body>
