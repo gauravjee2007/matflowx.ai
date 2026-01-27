@@ -178,7 +178,6 @@ function sendMessage(){
   .then(d=>{
     typing.remove();
     let reply=d.reply||d.output||d.text||d[0]?.output||"⚠️ No response";
-
     const ai=document.createElement("div");
     ai.className="message ai";
     ai.innerHTML=`
